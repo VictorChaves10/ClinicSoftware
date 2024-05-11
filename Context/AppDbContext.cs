@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ClinicSoftware.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClinicSoftware.Context
 {
@@ -6,5 +7,6 @@ namespace ClinicSoftware.Context
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
+        public DbSet<Client> Clients { get; set; }
     }
 }
