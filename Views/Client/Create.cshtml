@@ -1,0 +1,63 @@
+﻿
+@model ClinicSoftware.Models.Client
+
+<section>
+
+        <header class="text-center">
+        <h2>Cadastrar Cliente</h2>
+    </header>
+
+    <div class="col-md-6 m-auto">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group col p-1">
+                <label asp-for="ClientName" class="form-label"></label>
+                <input asp-for="ClientName" class="form-control" />
+                <span asp-validation-for="ClientName" class="invalid-feedback"></span>
+            </div>
+
+            <div class="row form-group p-1">
+                <div class=" col-6">
+                    <label asp-for="ClientCPF" class="control-label"></label>
+                    <input asp-for="ClientCPF" class="form-control" />
+                </div>
+                <div class=" col-6">
+                    <label asp-for="ClientBirthday" class="control-label"></label>
+                    <input asp-for="ClientBirthday" asp-format="{0:dd/MM/yyyy}" class="form-control" />
+                    <span asp-validation-for="ClientBirthday" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row form-group p-1">
+                <div class="col-6">
+                    <label asp-for="ClientPhoneNumber" class="control-label"></label>
+                    <input asp-for="ClientPhoneNumber" class="form-control" />
+                    <span asp-validation-for="ClientPhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="col-6">
+                    <label asp-for="ClientAlternateContact" class="control-label"></label>
+                    <input asp-for="ClientAlternateContact" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group p-1 col-6">
+                <label asp-for="ClientEmail" class="control-label"></label>
+                <input asp-for="ClientEmail" class="form-control" />
+            </div>
+
+            <div class="form-group col-6 p-1">
+                <label asp-for="ProfileImageUrl" class="control-label"></label>
+                <input type="file" name="profileImage" class="form-control" />
+
+            </div>
+
+            <div class="form-group mt-2">
+                <input type="submit" value="Adicionar" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+
+</section>

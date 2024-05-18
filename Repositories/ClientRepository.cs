@@ -52,27 +52,19 @@ namespace ClinicSoftware.Repositories
                 throw new ArgumentNullException(nameof(client), "Objeto cliente não pode ser nulo.");
             }
 
-            var existingClient = await _context.Clients.FindAsync(client.ClientId);
-
-            if (existingClient == null)
-            {
-                throw new InvalidOperationException("Não foi localizado o cliente.");
-            }
+            var existingClient = await _context.Clients.FindAsync(client.ClientId) ?? throw new InvalidOperationException("Não foi localizado o cliente.");
 
             _context.Entry(existingClient).CurrentValues.SetValues(client);
+
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteClient(int clientId)
         {
-            var existingClient = await _context.Clients.FindAsync(clientId);
-
-            if (existingClient == null)
-            {
-                throw new InvalidOperationException("Não foi localizado o cliente.");
-            }
+            var existingClient = await _context.Clients.FindAsync(clientId) ?? throw new InvalidOperationException("Não foi localizado o cliente.");
 
             _context.Clients.Remove(existingClient);
+
             await _context.SaveChangesAsync();
         }
     }

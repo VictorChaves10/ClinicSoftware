@@ -1,4 +1,7 @@
 using ClinicSoftware.Context;
+using ClinicSoftware.Repositories;
+using ClinicSoftware.Repositories.Interfaces;
+using ClinicSoftware.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClinicSoftware
@@ -17,6 +20,9 @@ namespace ClinicSoftware
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString));
             var app = builder.Build();
+
+            builder.Services.AddScoped<IClientRepository, ClientRepository>();
+            builder.Services.AddScoped<ISaveImage, SaveImage>();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
