@@ -7,6 +7,7 @@ namespace ClinicSoftware.Repositories.Interfaces
         Task AddClient(Client client);
         Task EditClient(Client client);
         Task DeleteClient(int clientId);
+        Task<Client> GetClientById(int clientId);
         IEnumerable<Client> Clients { get; }
     }
 }

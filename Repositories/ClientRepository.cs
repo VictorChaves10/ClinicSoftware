@@ -14,9 +14,6 @@ namespace ClinicSoftware.Repositories
             _context = context;
         }
 
-        public IEnumerable<Client> Clients => _context.Clients;
-
-
         public async Task AddClient(Client client)
         {
 
@@ -26,7 +23,7 @@ namespace ClinicSoftware.Repositories
             }
 
             var existingClient = _context.Clients
-                                            .FirstOrDefaultAsync(c => c.ClientPhoneNumber == client.ClientPhoneNumber);
+                                            .FirstOrDefault(c => c.ClientPhoneNumber == client.ClientPhoneNumber);
 
             if (existingClient != null)
             {
@@ -35,6 +32,7 @@ namespace ClinicSoftware.Repositories
 
             try
             {
+
                 _context.Clients.Add(client);
                 await _context.SaveChangesAsync();
 
@@ -66,6 +64,15 @@ namespace ClinicSoftware.Repositories
             _context.Clients.Remove(existingClient);
 
             await _context.SaveChangesAsync();
+        }
+
+        public IEnumerable<Client> Clients => _context.Clients;
+
+        public async Task<Client> GetClientById(int clientId)
+        {
+            var client = await _context.Clients.FindAsync(clientId) ?? throw new InvalidOperationException("Não foi localizado o cliente.");
+
+            return client;
         }
     }
 }

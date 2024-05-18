@@ -15,14 +15,18 @@ namespace ClinicSoftware
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddScoped<IClientRepository, ClientRepository>();
+            builder.Services.AddScoped<IManagerImage, ManegerImage>();
+
+
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
             var app = builder.Build();
 
-            builder.Services.AddScoped<IClientRepository, ClientRepository>();
-            builder.Services.AddScoped<ISaveImage, SaveImage>();
+     
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

@@ -3,18 +3,20 @@ using ClinicSoftware.Repositories.Interfaces;
 using ClinicSoftware.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClinicSoftware.Controllers
 {
     public class ClientController : Controller
     {
         private readonly IClientRepository _clientRepository;
-        private readonly ISaveImage _saveImage;
+        private readonly IManagerImage _managerImage;
 
-        public ClientController(IClientRepository clientRepository, ISaveImage saveImage)
+        public ClientController(IClientRepository clientRepository, IManagerImage managerImage)
         {
             _clientRepository = clientRepository;
-            _saveImage = saveImage;
+            _managerImage = managerImage;
         }
 
         public IActionResult Index()
@@ -23,11 +25,16 @@ namespace ClinicSoftware.Controllers
         }
 
 
+        public IActionResult Create()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Client client, IFormFile profileImage)
+        public async Task<IActionResult> Create(Client client, IFormFile? profileImage)
         {
-            
+           
             if (ModelState.IsValid)
             {
                 var clientExist = _clientRepository.Clients
@@ -41,20 +48,71 @@ namespace ClinicSoftware.Controllers
 
                 if (profileImage != null && profileImage.Length > 0)
                 {
-                    if (!_saveImage.IsImageFile(profileImage))
+                    if (!_managerImage.IsImageFile(profileImage))
                     {
                         ModelState.AddModelError("ProfileImage", "O arquivo enviado não é uma imagem válida.");
                         return View(client);
                     }
 
-                    client.ProfileImageUrl = _saveImage.SaveImageRepository(profileImage);
+                    client.ProfileImageUrl = await _managerImage.SaveImageRepository(profileImage);
                 }
 
-                _clientRepository.AddClient(client);
-
-                TempData["SuccessMessage"] = "Cliente adicionado com sucesso!";
+                await _clientRepository.AddClient(client);
 
                 return RedirectToAction("Index", "Home");
+            }
+
+            return View(client);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        
+        {
+            var client = await _clientRepository.GetClientById(id);
+
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            return View(client);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Client client, IFormFile? profileImage)
+        {
+            if (id != client.ClientId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                var existingClient = await _clientRepository.GetClientById(id);
+
+                if (profileImage != null && profileImage.Length > 0)
+                {
+                    if (!_managerImage.IsImageFile(profileImage))
+                    {
+                        ModelState.AddModelError("ProfileImage", "O arquivo enviado não é uma imagem válida.");
+                        return View(client);
+                    }
+
+                    if (!string.IsNullOrEmpty(existingClient.ProfileImageUrl))
+                    {
+                        _managerImage.DeleteImage(existingClient.ProfileImageUrl);
+                    }
+
+                    client.ProfileImageUrl = await _managerImage.SaveImageRepository(profileImage);
+                }
+                else
+                {
+                    client.ProfileImageUrl = existingClient.ProfileImageUrl;
+                }
+
+                await _clientRepository.EditClient(client);
+                return RedirectToAction("Index");
             }
 
             return View(client);
