@@ -4,7 +4,6 @@
     {     
         bool IsImageFile(IFormFile file);
         Task<string> SaveImageRepository(IFormFile file);
-
         void DeleteImage(string imageUrl);
     }
 }

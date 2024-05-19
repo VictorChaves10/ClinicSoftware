@@ -19,17 +19,24 @@ namespace ClinicSoftware.Controllers
             _managerImage = managerImage;
         }
 
+
         public IActionResult Index()
         {
-            return View();
+            var clients = _clientRepository.Clients;
+
+            return View(clients);
         }
 
 
+
+        // GET: Client/Create
         public IActionResult Create()
         {
             return View();
         }
 
+
+        // POST: Client/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Client client, IFormFile? profileImage)
@@ -37,6 +44,7 @@ namespace ClinicSoftware.Controllers
            
             if (ModelState.IsValid)
             {
+                   
                 var clientExist = _clientRepository.Clients
                                                 .FirstOrDefault(c => c.ClientPhoneNumber == client.ClientPhoneNumber);
 
@@ -46,6 +54,7 @@ namespace ClinicSoftware.Controllers
                     return View(client);
                 }
 
+                // Processamento da imagem do perfil
                 if (profileImage != null && profileImage.Length > 0)
                 {
                     if (!_managerImage.IsImageFile(profileImage))
@@ -65,6 +74,8 @@ namespace ClinicSoftware.Controllers
             return View(client);
         }
 
+
+        // GET: Client/Edit/5
         public async Task<IActionResult> Edit(int id)
         
         {
@@ -78,19 +89,18 @@ namespace ClinicSoftware.Controllers
             return View(client);
         }
 
+
+        // POST: Client/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Client client, IFormFile? profileImage)
         {
-            if (id != client.ClientId)
-            {
-                return NotFound();
-            }
 
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 var existingClient = await _clientRepository.GetClientById(id);
 
+                // Processamento da imagem do perfil
                 if (profileImage != null && profileImage.Length > 0)
                 {
                     if (!_managerImage.IsImageFile(profileImage))
@@ -108,6 +118,7 @@ namespace ClinicSoftware.Controllers
                 }
                 else
                 {
+                    // Reatribuir a imagem existente para garantir que não haja perda de dados
                     client.ProfileImageUrl = existingClient.ProfileImageUrl;
                 }
 
@@ -116,6 +127,38 @@ namespace ClinicSoftware.Controllers
             }
 
             return View(client);
+        }
+
+
+        // GET: Client/Delete/5
+        public async Task<IActionResult> Delete(int Id)
+        {
+          
+            var client = await _clientRepository.GetClientById(Id);
+
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            return View(client);
+        }
+
+
+        // POST: Client/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int clientId)
+        {
+            var client = await _clientRepository.GetClientById(clientId);
+
+            if (client == null)
+            {
+                return NotFound();
+            }
+            await _clientRepository.DeleteClient(clientId);
+
+            return RedirectToAction(nameof(Index));
         }
 
     }
