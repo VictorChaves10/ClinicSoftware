@@ -27,23 +27,21 @@ body {
 }
 
 
-
-
 /*SECTION ANIVERSARIANTES*/
 
-.card-aniversariante {
+.card-client {
     width: 35rem;
     height: auto;
     padding: 0px;
 }
 
-    .card-aniversariante h2 {
+    .card-client h2 {
         font-size: 1.5rem;
         text-align: center;
     }
 
-.header-card-aniversariante {
-    background-color: #03A64A;
+.header-card-client {
+    background-color: #387373;
     text-align: center;
     padding: 0.5rem;
 }
@@ -65,10 +63,14 @@ body {
     }
 
 
-.card-body-aniversariante {
+.card-body-data {
     display: flex;
-    justify-content: start;
     flex-direction: row;
+    justify-content: start;
     align-items: baseline;
-    font-size: 12px;
+}
+
+.card-body-data p{
+    font-size: 0.9rem;
+    font-weight:bold;
 }
