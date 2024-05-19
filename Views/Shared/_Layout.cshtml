@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ClinicSoftware.styles.css" asp-append-version="true" />
+
+    <!--Filtro de pesquisa e páginação-->
+    <link href="https://cdn.datatables.net/v/bs5/dt-2.0.7/datatables.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -43,7 +46,11 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/v/bs5/dt-2.0.7/datatables.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    <!--Filtro de pesquisa e páginação-->
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
