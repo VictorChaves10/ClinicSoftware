@@ -1,0 +1,67 @@
+﻿@model ClinicSoftware.Models.Client
+
+
+
+
+<div class="row gap-1 justify-content-center">
+
+<div class="card card-aniversariante shadow m-1">
+
+    <div class="header-card-aniversariante">
+        <div class="card-image-aniversariante">
+            @if (!string.IsNullOrEmpty(Model.ProfileImageUrl))
+            {
+                <img src="@Model.ProfileImageUrl" alt="Perfil" />
+            }
+            else
+            {
+                <img src="/ProfileImages/default-avatar.jpg" alt="Perfil" />
+            }
+        </div>
+    </div>
+
+    <div class="card-body">
+        <h2 class="card-title">@Model.ClientName</h2>
+        <div class="row-col mt-3">
+            <div class="col card-body-aniversariante gap-2">
+                <i class="fa-solid fa-phone"></i>
+                <p class="">@Model.ClientPhoneNumber</p>
+            </div>
+
+            <div class="col card-body-aniversariante gap-2">
+                <i class="fa-regular fa-calendar-days"></i>
+                <p>@Model.ClientBirthday.ToShortDateString()</p>
+            </div>
+
+            <div class="col card-body-aniversariante gap-2 justify-content-start">
+                <i class="fa-solid fa-envelope "></i>
+                @if (!string.IsNullOrEmpty(Model.ClientEmail))
+                {
+                    <p>@Model.ClientEmail</p>
+                }
+                else
+                {
+                    <p>Sem informação</p>
+                }
+
+            </div>
+
+            <div class="col-12 card-body-aniversariante gap-2">
+                <i class="fa-regular fa-calendar-check"></i>
+                <p>Total de atendimentos: 0 </p>
+            </div>
+
+            <div class="col card-body-aniversariante gap-2">
+                <i class="fa-solid fa-calendar-xmark"></i>
+                <p>Último atendimento: 0 dias</p>
+            </div>
+
+        </div>
+
+        <div class="d-grid col-12 mt-1">
+            <a asp-action="Edit" asp-route-id="@Model.ClientId" class="btn btn-outline-primary btn-sm">Editar cliente</a>
+        </div>
+
+    </div>
+</div>
+</div>

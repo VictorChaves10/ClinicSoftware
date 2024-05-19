@@ -28,6 +28,19 @@ namespace ClinicSoftware.Controllers
         }
 
 
+        // GET: Client/Details/5
+        public async Task<IActionResult> Details(int id)
+        {       
+
+            var client = await _clientRepository.GetClientById(id);
+
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            return View(client);
+        }
 
         // GET: Client/Create
         public IActionResult Create()
