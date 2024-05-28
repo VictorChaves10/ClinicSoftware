@@ -7,14 +7,9 @@
 
         <div class="header-card-client">
             <div class="card-image-aniversariante">
-                @if (!string.IsNullOrEmpty(Model.ProfileImageUrl))
-                {
-                    <img src="@Model.ProfileImageUrl" alt="Perfil" />
-                }
-                else
-                {
-                    <img src="/ProfileImages/default-avatar.jpg" alt="Perfil" />
-                }
+
+                 <img src="@Model.ProfileImageUrl" alt="Perfil" />
+               
             </div>
         </div>
 
@@ -62,7 +57,7 @@
                 </div>
                 
             </div>
-            <div class="d-grid col-12 mt-1">
+            <div class="d-grid col-12 mt-5">
                 <a asp-action="Edit" asp-route-id="@Model.ClientId" class="btn btn-outline-primary btn-sm">Editar cliente</a>
             </div>
 

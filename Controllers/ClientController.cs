@@ -78,6 +78,10 @@ namespace ClinicSoftware.Controllers
 
                     client.ProfileImageUrl = await _managerImage.SaveImageRepository(profileImage);
                 }
+                else
+                {
+                    client.ProfileImageUrl = "default-avatar.jpg";
+                }
 
                 await _clientRepository.AddClient(client);
 
