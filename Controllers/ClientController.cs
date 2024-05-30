@@ -72,7 +72,7 @@ namespace ClinicSoftware.Controllers
                 {
                     if (!_managerImage.IsImageFile(profileImage))
                     {
-                        ModelState.AddModelError("ProfileImage", "O arquivo enviado não é uma imagem válida.");
+                        ModelState.AddModelError("ProfileImageUrl", "O arquivo enviado não é uma imagem válida.");
                         return View(client);
                     }
 
@@ -80,7 +80,7 @@ namespace ClinicSoftware.Controllers
                 }
                 else
                 {
-                    client.ProfileImageUrl = "default-avatar.jpg";
+                    client.ProfileImageUrl = "\\ProfileImages\\default-avatar.jpg";
                 }
 
                 await _clientRepository.AddClient(client);
@@ -122,7 +122,7 @@ namespace ClinicSoftware.Controllers
                 {
                     if (!_managerImage.IsImageFile(profileImage))
                     {
-                        ModelState.AddModelError("ProfileImage", "O arquivo enviado não é uma imagem válida.");
+                        ModelState.AddModelError("ProfileImageUrl", "O arquivo enviado não é uma imagem válida.");
                         return View(client);
                     }
 
@@ -140,7 +140,9 @@ namespace ClinicSoftware.Controllers
                 }
 
                 await _clientRepository.EditClient(client);
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Details", "Client", new { id = client.ClientId });
+
             }
 
             return View(client);

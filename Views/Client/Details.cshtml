@@ -1,9 +1,9 @@
 ﻿@model ClinicSoftware.Models.Client
 
 
-<div class="row gap-1 justify-content-center">
+<div class="gap-4 d-flex flex-column align-items-center">
 
-    <div class="card card-client shadow m-1">
+    <div class="card card-client shadow m-auto">
 
         <div class="header-card-client">
             <div class="card-image-aniversariante">
@@ -63,4 +63,10 @@
 
         </div>
     </div>
+
+    <div>
+        <a asp-controller="Client" asp-action="Index" class="btn btn-primary">Voltar</a>
+        <a asp-controller="Client" asp-action="Delete" asp-route-id="@Model.ClientId" class="btn btn-danger">Deletar</a>
+    </div>
+
 </div>
