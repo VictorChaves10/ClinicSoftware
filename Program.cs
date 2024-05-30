@@ -16,6 +16,8 @@ namespace ClinicSoftware
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped<IClientRepository, ClientRepository>();
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
             builder.Services.AddScoped<IManagerImage, ManegerImage>();
 
 
