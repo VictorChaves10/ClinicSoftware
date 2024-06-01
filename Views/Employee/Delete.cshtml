@@ -1,0 +1,46 @@
+﻿@model ClinicSoftware.Models.Employee
+
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<section class="container-sm m-auto">
+    <header>
+
+        <h3>Realmente deseja exluir esse funcionário?</h3>
+
+    </header>
+
+    <div>
+
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EmployeeName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EmployeePhoneNumber)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EmployeePhoneNumber)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EmployeeEmail)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EmployeeEmail)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="EmployeeId" />
+            <input type="submit" value="Deletar" class="btn btn-danger" /> |
+            <a asp-action="Index">Voltar</a>
+        </form>
+    </div>
+
+</section>

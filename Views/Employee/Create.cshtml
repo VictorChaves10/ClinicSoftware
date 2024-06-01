@@ -1,0 +1,56 @@
+﻿@model ClinicSoftware.Models.Employee
+
+<section>
+
+    <header class="text-center">
+        <h2>Cadastrar Funcionário</h2>
+    </header>
+
+    <div class="col-md-6 m-auto">
+        <form asp-action="Create" method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group col p-1">
+                <label asp-for="EmployeeName" class="form-label"></label>
+                <input asp-for="EmployeeName" class="form-control" />
+                <span asp-validation-for="EmployeeName" class="invalid-feedback"></span>
+            </div>
+
+            <div class="row form-group p-1">
+                <div class=" col-6">
+                    <label asp-for="EmployeeCpf" class="control-label"></label>
+                    <input asp-for="EmployeeCpf" class="form-control" />
+                </div>
+                <div class=" col-6">
+                    <label asp-for="EmployeeBirthday" class="control-label"></label>
+                    <input asp-for="EmployeeBirthday" asp-format="{0:dd/MM/yyyy}" class="form-control" />
+                    <span asp-validation-for="EmployeeBirthday" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row form-group p-1">
+                <div class="col-6">
+                    <label asp-for="EmployeePhoneNumber" class="control-label"></label>
+                    <input asp-for="EmployeePhoneNumber" class="form-control" />
+                    <span asp-validation-for="EmployeePhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="col-6">
+                    <label asp-for="EmployeeAlternateContact" class="control-label"></label>
+                    <input asp-for="EmployeeAlternateContact" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group p-1 col-6">
+                <label asp-for="EmployeeEmail" class="control-label"></label>
+                <input asp-for="EmployeeEmail" class="form-control" />
+            </div>
+
+            <div class="form-group mt-2">
+                <input type="submit" value="Adicionar" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+
+</section>

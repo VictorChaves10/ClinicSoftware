@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Employee>
+
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section class="m-1 p-2">
+
+    <h1 class="text-center m-5">Funcionários</h1>
+
+    <div class="mb-5">
+        <a asp-action="Create" class="btn btn-primary">Adicionar funcionário</a>
+    </div>
+
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeBirthday)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeePhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeAlternateContact)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeEmail)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeBirthday)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeePhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeAlternateContact)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeEmail)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.EmployeeId">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.EmployeeId">Detalhes</a> |
+                        <a asp-action="Delete" asp-route-id="@item.EmployeeId">Deletar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
