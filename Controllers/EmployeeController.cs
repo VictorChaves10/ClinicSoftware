@@ -76,7 +76,7 @@ namespace ClinicSoftware.Controllers
         // POST: Employee/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Employee employee)
+        public async Task<IActionResult> Edit(Employee employee)
         {
 
             if (ModelState.IsValid)
