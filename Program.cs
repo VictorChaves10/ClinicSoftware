@@ -17,7 +17,7 @@ namespace ClinicSoftware
 
             builder.Services.AddScoped<IClientRepository, ClientRepository>();
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-
+            builder.Services.AddScoped<IProcedureRepository, ProcedureRepository>();
             builder.Services.AddScoped<IManagerImage, ManegerImage>();
 
 

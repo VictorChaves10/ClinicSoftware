@@ -51,6 +51,7 @@ namespace ClinicSoftware.Controllers
             {
                 await _employeeRepository.AddEmployee(employee);
 
+                TempData["SuccessMessage"] = "Funcionário adicionado com sucesso!";
                 return RedirectToAction("Index", "Home");
             }
 

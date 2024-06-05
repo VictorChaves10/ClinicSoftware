@@ -1,0 +1,49 @@
+﻿@model ClinicSoftware.Models.Procedure
+
+<section>
+
+    <header class="text-center">
+        <h2>Cadastrar procedimento</h2>
+    </header>
+
+    <div class="col-md-6 m-auto py-5">
+        <form asp-action="Create" method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+           
+            <div class="row form-group p-1">
+
+                <div class="col-8 ">
+                    <label asp-for="ProcedureName" class="control-label"></label>
+                    <input asp-for="ProcedureName" class="form-control" />
+                    <span asp-validation-for="ProcedureName" class="text-danger"></span>
+                </div>
+
+                
+                <div class="col-4 ">
+                    <label asp-for="ProcedurePrice" class="control-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text">R$</span>
+                        <input asp-for="ProcedurePrice" class="form-control" />
+                    </div>
+          
+                    <span asp-validation-for="ProcedurePrice" class="text-danger"></span>
+                </div>
+
+                <div class=" col-12">
+                    <label asp-for="ProcedureDescription" class="control-label"></label>
+                    <textarea asp-for="ProcedureDescription" class="form-control"></textarea>
+                    <span asp-validation-for="ProcedureDescription" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Adicionar" class="btn btn-primary" />
+                <a class="btn btn-outline-primary" asp-action="Index">Voltar para lista</a>
+            </div>
+
+        </form>
+    </div>
+
+</section>

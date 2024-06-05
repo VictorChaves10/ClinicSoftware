@@ -85,6 +85,7 @@ namespace ClinicSoftware.Controllers
 
                 await _clientRepository.AddClient(client);
 
+                TempData["SuccessMessage"] = "Cliente adicionado com sucesso!";
                 return RedirectToAction("Index", "Home");
             }
 
