@@ -10,5 +10,8 @@ namespace ClinicSoftware.Context
         public DbSet<Client> Clients { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Procedure> Procedures { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> Items { get; set; }
+
     }
 }
